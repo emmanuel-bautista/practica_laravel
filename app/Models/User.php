@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'birth_date'
     ];
 
     /**
@@ -41,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function userScopeDate($query) {
+        return $this->query->whereYear('birth_date', '>', 1996);
+    }
+
+
+    public function task() {
+        return $this->hasOne(Task::class);
+    }
+
+
 }
